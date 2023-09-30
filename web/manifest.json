@@ -1,6 +1,6 @@
 {
-    "name": "space_app",
-    "short_name": "space_app",
+    "name": "healthy_fish_app",
+    "short_name": "healthy_fish_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
