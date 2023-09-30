@@ -35,10 +35,10 @@ class TrophyCaseState extends State<TrophyCase> {
 
 Widget myAppBar() {
   return AppBar (
-    title: const Text("PetHealth"),
+    title: const Text("Healthy Fish"),
     centerTitle: true,
     titleTextStyle: const TextStyle(
-        color: Colors.black,
+        // colors
         fontSize: 30,
         fontWeight: FontWeight.w800,
     ),
@@ -93,51 +93,11 @@ Widget buildHeaders(BuildContext context) => Container(
         backgroundImage: AssetImage("assets/logo.jpg"),
       ),
       SizedBox(height: 5,),
-      Text('PetHealth', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),),
+      Text('Healthy Fish', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),),
       Text('Be consistent', style: TextStyle(color: Colors.white),)
     ],
   ),
 );
-
-// Widget buildMenuItems(BuildContext context) => Container(
-//   padding: const EdgeInsets.all(24.0),
-//   child: Wrap(
-//     runSpacing: 16,
-//     children: [
-//       const ListTile(
-//         leading: Icon(Icons.sports_esports),
-//         title: Text("Game on!"),
-//         onTap: null,
-//       ),
-//       ListTile(
-//         leading: const Icon(Icons.checklist_rounded),
-//         title: const Text("Daily Tasks"),
-//         onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ToDoList()));},
-//       ),
-//       const Divider(color: Colors.black54,),
-//       const ListTile(
-//         leading: Icon(Icons.military_tech_sharp),
-//         title: Text("Achievements"),
-//         onTap: null,
-//       ),
-//       const ListTile(
-//         leading: Icon(Icons.storefront_outlined),
-//         title: Text("Store"),
-//         onTap: null,
-//       ),
-//       const ListTile(
-//         leading: Icon(Icons.newspaper_outlined),
-//         title: Text("News"),
-//         onTap: null,
-//       ),
-//       const ListTile(
-//         leading: Icon(Icons.settings),
-//         title: Text("Settings"),
-//         onTap: null,
-//       )
-//     ],
-//   ),
-// );
 
 class _Body extends StatefulWidget {
   const _Body();
@@ -178,7 +138,7 @@ class _BodyState extends State<_Body> {
                           alignment: Alignment.centerRight,
                           height: 390,
                           width: 100,
-                          child: const Image(image: AssetImage('assets/polarBear.png'),),
+                          child: const Image(image: AssetImage(''),),
                         ),
                       ),
                     ],
@@ -214,7 +174,7 @@ class _BodyState extends State<_Body> {
                           ),
                           const SizedBox(width: 7,),
                           const Text(
-                            'Your pet doggo!',
+                            'Your pet fish!',
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
                             ),
                           ),
