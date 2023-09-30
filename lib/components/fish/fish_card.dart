@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:space_app/components/fish/fish_item.dart';
-import 'package:space_app/main.dart';
-import 'package:space_app/screens/detail_screen.dart';
-import 'package:space_app/utils/extension/nav.dart';
+import 'package:healthy_fish_app/components/fish/fish_item.dart';
+import 'package:healthy_fish_app/main.dart';
+import 'package:healthy_fish_app/screens/detail_screen.dart';
+import 'package:healthy_fish_app/utils/extension/nav.dart';
 
-import 'package:space_app/utils/extension/screen_size.dart';
+import 'package:healthy_fish_app/utils/extension/screen_size.dart';
 
 class FishCard extends StatefulWidget {
   const FishCard({

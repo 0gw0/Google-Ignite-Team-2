@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:space_app/components/shared/txt_style.dart';
-import 'package:space_app/models/fish.dart';
-import 'package:space_app/utils/constants/colors.dart';
-import 'package:space_app/utils/extension/screen_size.dart';
+import 'package:healthy_fish_app/components/shared/txt_style.dart';
+import 'package:healthy_fish_app/models/fish.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/extension/screen_size.dart';
 
 class FishItem extends StatelessWidget {
   const FishItem({
