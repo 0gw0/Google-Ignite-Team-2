@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:space_app/components/categories/category_item.dart';
-import 'package:space_app/data/categories.dart';
+import 'package:healthy_fish_app/components/categories/category_item.dart';
+import 'package:healthy_fish_app/data/categories.dart';
 
 class CategoriesComponent extends StatefulWidget {
   const CategoriesComponent({

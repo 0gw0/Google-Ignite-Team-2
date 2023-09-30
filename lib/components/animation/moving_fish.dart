@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:space_app/data/fish_animation.dart';
+import 'package:healthy_fish_app/data/fish_animation.dart';
 
 class MovingFish extends StatefulWidget {
   const MovingFish({super.key, required this.child, required this.animatePosition, required this.durationInMs, required this.delayInMs});
