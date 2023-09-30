@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
 import 'trophycase.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

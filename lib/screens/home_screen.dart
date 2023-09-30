@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/components/categories/categories_component.dart';
-import 'package:space_app/components/news/dailychallenge.dart';
-import 'package:space_app/components/news/news_item.dart';
-import 'package:space_app/components/fish/fish_card.dart';
-import 'package:space_app/components/shared/txt_style.dart';
+import 'package:healthy_fish_app/components/categories/categories_component.dart';
+import 'package:healthy_fish_app/components/news/dailychallenge.dart';
+import 'package:healthy_fish_app/components/news/news_item.dart';
+import 'package:healthy_fish_app/components/fish/fish_card.dart';
+import 'package:healthy_fish_app/components/shared/txt_style.dart';
 
-import 'package:space_app/utils/constants/colors.dart';
-import 'package:space_app/utils/constants/spaces.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/constants/spaces.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

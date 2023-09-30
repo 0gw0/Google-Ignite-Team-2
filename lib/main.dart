@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/data/fish_data.dart';
-import 'package:space_app/models/fish.dart';
-import 'package:space_app/screens/splash_screen.dart';
+import 'package:healthy_fish_app/data/fish_data.dart';
+import 'package:healthy_fish_app/models/fish.dart';
+import 'package:healthy_fish_app/screens/splash_screen.dart';
 
 List<FishsModel> listFish = [];
 

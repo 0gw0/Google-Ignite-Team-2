@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/components/animation/moving_fish.dart';
-import 'package:space_app/components/shared/txt_style.dart';
-import 'package:space_app/data/fish_animation.dart';
-import 'package:space_app/screens/home_screen.dart';
-import 'package:space_app/utils/constants/colors.dart';
-import 'package:space_app/utils/extension/nav.dart';
-import 'package:space_app/utils/extension/screen_size.dart';
+import 'package:healthy_fish_app/components/animation/moving_fish.dart';
+import 'package:healthy_fish_app/components/shared/txt_style.dart';
+import 'package:healthy_fish_app/data/fish_animation.dart';
+import 'package:healthy_fish_app/screens/home_screen.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/extension/nav.dart';
+import 'package:healthy_fish_app/utils/extension/screen_size.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({
