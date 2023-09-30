@@ -1,5 +1,5 @@
 import 'package:flutter/rendering.dart';
-import 'package:space_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
 
 const headerStyle = TextStyle(
   fontFamily: 'Proportional',

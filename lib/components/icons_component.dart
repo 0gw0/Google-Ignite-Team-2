@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/widgets.dart';
-import 'package:space_app/utils/constants/colors.dart';
-import 'package:space_app/utils/extension/nav.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/extension/nav.dart';
 
 class IconsComponent extends StatelessWidget {
   const IconsComponent({

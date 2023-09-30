@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:space_app/utils/constants/colors.dart';
-import 'package:space_app/utils/constants/spaces.dart';
-import 'package:space_app/components/shared/txt_style.dart';
-import 'package:space_app/models/fish.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/constants/spaces.dart';
+import 'package:healthy_fish_app/components/shared/txt_style.dart';
+import 'package:healthy_fish_app/models/fish.dart';
 
 // This file contains Size and Health data classes for each fish. We could add another column for happiness etc if needed
 

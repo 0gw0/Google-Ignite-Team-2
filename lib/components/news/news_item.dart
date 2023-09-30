@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:space_app/components/shared/txt_style.dart';
-import 'package:space_app/data/dailychallenge.dart';
-import 'package:space_app/utils/constants/colors.dart';
-import 'package:space_app/utils/constants/spaces.dart';
-import 'package:space_app/screens/goals.dart';
+import 'package:healthy_fish_app/components/shared/txt_style.dart';
+import 'package:healthy_fish_app/data/dailychallenge.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/utils/constants/spaces.dart';
+import 'package:healthy_fish_app/screens/goals.dart';
 
 // class NewsItem extends StatelessWidget {
 //   const NewsItem({super.key});

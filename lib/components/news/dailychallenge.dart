@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:space_app/components/shared/txt_style.dart';
-import 'package:space_app/utils/constants/colors.dart';
+import 'package:healthy_fish_app/components/shared/txt_style.dart';
+import 'package:healthy_fish_app/utils/constants/colors.dart';
 
 class DailyChallenge extends StatelessWidget {
   const DailyChallenge({
