@@ -2,15 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:healthy_fish_app/data/fish_data.dart';
 import 'package:healthy_fish_app/models/fish.dart';
 import 'package:healthy_fish_app/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
+import 'seashell_provider.dart';  // Import the SeashellProvider
+import 'seashell_counter.dart';   // Import the SeashellCounter
 
 List<FishsModel> listFish = [];
 
 void main() {
- for (var element in fishData["fish"]) {
+  for (var element in fishData["fish"]) {
     listFish.add(FishsModel.fromJson(element));
   }
 
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SeashellProvider(),
+        ),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -18,13 +30,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'test',
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'test',
       home: SplashScreen(),
     );
   }
 }
+
 
 
 
