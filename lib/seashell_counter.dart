@@ -19,7 +19,7 @@ class SeashellCounter extends StatelessWidget {
             child: Row(
               children: [
                 ImageIcon(
-                  AssetImage('assets/images/seashell.png'),
+                  AssetImage('../assets/images/seashell.png'),
                   color: Colors.yellow, // Change this to your desired color
                 ),
                 const SizedBox(width: 4),

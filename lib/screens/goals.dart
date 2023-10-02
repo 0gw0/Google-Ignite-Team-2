@@ -1,102 +1,169 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_fish_app/utils/constants/colors.dart';
+import '../utils/constants/colors.dart';
 import 'trophycase.dart';
+import 'dart:async';
+import 'package:healthy_fish_app/models/daily_task.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-class ToDoList extends StatelessWidget {
-  const ToDoList({super.key});
+final today = DateTime.now();
+final formattedDate =
+    "${today.day.toString().padLeft(2, '0')}-${today.month.toString().padLeft(2, '0')}-${today.year.toString()}";
 
+// Widget, which is the main screen of the app
+class ToDoList extends StatefulWidget {
+  const ToDoList({Key? key}) : super(key: key);
+
+
+
+  @override
+  _ToDoListState createState() => _ToDoListState();
+}
+
+// State of the main screen
+class _ToDoListState extends State<ToDoList> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
-        title: 'test',
-        home: Scaffold(
-          backgroundColor: black,
-          drawer: const NavigationDrawer(),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: <Widget>[
-                CurDateTime(),
-                const Expanded(child: ToDoWidget())
-              ],
-            ),
+      title: 'test',
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        drawer: const NavigationDrawer(),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              CurDateTime(),
+              Expanded(child: DailyTaskFetcher())
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
+// Fetch Firestore document and handle response
+class DailyTaskFetcher extends StatelessWidget {
+  const DailyTaskFetcher({super.key});
 
-class ToDoWidget extends StatefulWidget {
-  const ToDoWidget({super.key});
-
-  @override
-  State<ToDoWidget> createState() => _MyWidgetState();
-}
-
-final List<int> _list = List.generate(15, (i) => i);
-final List<bool> _selected = List.generate(15, (i) => false);
-final List<String> _taskList = [
-  "Take a 20-minute walk in nature to get some fresh air and sunshine. No phones allowed!",
-  "Practice deep breathing exercises for 5 minutes to reduce stress and promote relaxation",
-  "Try a new healthy recipe for dinner tonight, packed with nutritious ingredients",
-  "Set aside 15 minutes for a mindfulness meditation session to clear your mind",
-  "Drink a glass of water as soon as you wake up to stay hydrated throughout the day",
-  "Write down three things you're grateful for to foster a positive mindset",
-  "Get a good night's sleep by going to bed 30 minutes earlier than usual",
-  "Do 10 minutes of stretching exercises to improve flexibility and reduce muscle tension",
-  "Plan a social activity or call a friend to strengthen your social connections",
-  "Unplug from screens for an hour before bedtime to improve sleep quality",
-  "Start your day with a nutritious breakfast to fuel your body and mind",
-  "Spend quality time with a loved one, either in person or through a video call",
-  "Try a new form of physical activity, like dancing, yoga, or swimming",
-  "Set a timer to remind yourself to stand up and stretch every hour if you have a sedentary job or lifestyle",
-  "Practice a random act of kindness, such as helping a neighbour or complimenting a colleague"
-];
-final List<int> _numList = [3, 6, 7];
-final List<int> _secondList = [0];
-
-class _MyWidgetState extends State<ToDoWidget> {
-  int _itemCount = 0;
-  var myIcon = const Icon(Icons.health_and_safety);
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        separatorBuilder: (BuildContext context, int index) =>
-            const Divider(height: 20),
-        itemCount: _list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-              elevation: 0,
-              child: ListTile(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  subtitle: Text('${_taskList[index]}'),
-                  leading: _numList.contains(index)
-                      ? const Icon(Icons.heat_pump_sharp)
-                      : _secondList.contains(index)
-                          ? const Icon(Icons.bolt)
-                          : myIcon,
-                  textColor: const Color.fromARGB(255, 136, 127, 189),
-                  tileColor:
-                      _selected[index] ? Colors.green[900] : const Color.fromARGB(255, 38, 38, 110),
-                  onTap: () {
-                    setState(() => _selected[index] = !_selected[index]);
-                    setState(() {
-                      _itemCount += 1;
-                    });
-                    if (_itemCount == 5) {
-                      _itemCount = 0;
-                      showAlertDialog(context);
-                    }
-                  },
-                  title: Text("Task ${index + 1}")));
-        });
+    return FutureBuilder<List<DailyTask>>(
+      future: _fetchDailyTasks(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // Display a loading indicator while fetching data
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          // Handle any errors that occur during data fetching
+          return Center(child: Text("Error: ${snapshot.error}"));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          // If there is no data or data is empty, display a message
+          return Center(child: Text("No daily tasks available for today."));
+        } else {
+          // Display the list of daily tasks
+          return ToDoWidget(dailyTasks: snapshot.data!);
+        }
+      },
+    );
+  }
+
+  Future<List<DailyTask>> _fetchDailyTasks() async {
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('daily_task')
+        .where('date', isEqualTo: formattedDate)
+        .get();
+
+    return querySnapshot.docs.map((doc) => DailyTask.fromSnapshot(doc)).toList();
   }
 }
+
+// Widget that displays a list of daily tasks
+class ToDoWidget extends StatefulWidget {
+  final List<DailyTask> dailyTasks;
+
+  const ToDoWidget({Key? key, required this.dailyTasks}) : super(key: key);
+
+  @override
+  _ToDoWidgetState createState() => _ToDoWidgetState();
+}
+
+// State of the ToDoWidget. Populate each list with task and set gesture detector
+class _ToDoWidgetState extends State<ToDoWidget> {
+  List<List<bool>> _selected = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize _selected list for each daily task
+    _selected = List.generate(widget.dailyTasks.length,
+            (index) => List.generate(widget.dailyTasks[index].tasks.length, (i) => false));
+  }
+
+  int _itemCount = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: widget.dailyTasks.length,
+      itemBuilder: (BuildContext context, int index) {
+        final dailyTask = widget.dailyTasks[index];
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Date: ${dailyTask.date}",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            ...dailyTask.tasks.asMap().entries.map((entry) {
+              final int taskIndex = entry.key;
+              final String task = entry.value;
+
+              return GestureDetector(
+                onTap: () {
+                  // Handle the task tap event here
+                  // Toggle the selection state
+                  setState(() {
+                    _selected[index][taskIndex] = !_selected[index][taskIndex];
+                    _itemCount += 1;
+                  });
+
+                  if (_itemCount == 5) {
+                    _itemCount = 0;
+                    showAlertDialog(context);
+                  }
+                },
+                child: Card(
+                  elevation: 0,
+                  color: Colors.transparent,
+                  child: ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    subtitle: Text(task),
+                    leading: const Icon(Icons.heat_pump_sharp),
+                    textColor: const Color.fromARGB(255, 136, 127, 189),
+                    tileColor: _selected[index][taskIndex]
+                        ? darkBlue
+                        : const Color.fromARGB(255, 38, 38, 110),
+                    title: Text("Task ${taskIndex + 1}"),
+                  ),
+                ),
+              );
+            }).toList(),
+          ],
+        );
+      },
+    );
+  }
+}
+
 
 class CurDateTime extends StatelessWidget {
   @override
@@ -110,9 +177,11 @@ class CurDateTime extends StatelessWidget {
             greetingMessage(),
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          Text(getCurrentDate(),
-              style: const TextStyle(
-                  fontSize: 18, color: Color.fromARGB(255, 0, 115, 130)))
+          Text(
+            getCurrentDate(),
+            style:
+            const TextStyle(fontFamily: "Montserrat", fontSize: 24, color: Color.fromARGB(255, 0, 115, 130)),
+          ),
         ],
       ),
     );
@@ -133,30 +202,32 @@ class CurDateTime extends StatelessWidget {
 
   String getCurrentDate() {
     var date = DateTime.now().toString();
-
     var dateParse = DateTime.parse(date);
-
-    var formattedDate = "${dateParse.day}-${dateParse.month}-${dateParse.year}";
+    var formattedDate =
+        "${dateParse.day}-${dateParse.month}-${dateParse.year}";
     return formattedDate.toString();
   }
 }
 
-showAlertDialog(BuildContext context) {
+showAlertDialog(BuildContext context) async {
+  // Create a GlobalKey to uniquely identify the AlertDialog
+  GlobalKey<State<StatefulWidget>> alertDialogKey = GlobalKey();
+
   // set up the button
   Widget okButton = TextButton(
     child: const Text("OK"),
     onPressed: () async {
-      Navigator.pop(context);
-      await Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const TrophyCase()));
+      // Dismiss the dialog by popping it using the global key
+      Navigator.of(alertDialogKey.currentContext!).pop();
     },
-
   );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
+    key: alertDialogKey, // Assign the GlobalKey to the AlertDialog
     title: const Text("Congratulations!"),
-    content: const Text("You have completed the minimum number of required tasks. Keep it up!"),
+    content: const Text(
+        "You have completed the minimum number of required tasks. Keep it up!"),
     actions: [
       okButton,
     ],
@@ -170,7 +241,6 @@ showAlertDialog(BuildContext context) {
     },
   );
 }
-
 
 
 Widget buildMenuItems(BuildContext context) => Container(

@@ -11,6 +11,9 @@ import 'package:healthy_fish_app/components/shared/txt_style.dart';
 import 'package:healthy_fish_app/utils/constants/colors.dart';
 import 'package:healthy_fish_app/utils/constants/spaces.dart';
 
+import '/seashell_counter.dart';  // Import the SeashellCounter
+import '/components/icons_component.dart';   // Import the IconsComponent
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -49,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: IconsComponent(),  // Display the custom icons component
             ),
             Positioned(
-              bottom: 20,
+              top: 20,
               right: 20,
               child: SeashellCounter(),  // Display the seashell counter at the bottom-right corner
             ),

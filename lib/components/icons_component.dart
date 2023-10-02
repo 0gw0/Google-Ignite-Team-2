@@ -11,7 +11,6 @@ class IconsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Assuming you have a variable for seashell count, replace 0 with the actual count
     int seashellCount = 0;
 
     return Row(
@@ -45,7 +44,7 @@ class IconsComponent extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Image.asset(
-                'assets/images/seashell.png',  // Correct path to your seashell icon
+                '../assets/images/seashell.png',  // Correct path to your seashell icon
                 color: Colors.yellow,
                 height: 24,  // Adjust the size as needed
                 width: 24,

@@ -46,7 +46,9 @@ class SplashScreen extends StatelessWidget {
                   text: TextSpan(
                     style: headerStyle.copyWith(fontSize: 35),
                     children: [
-                      const TextSpan(text: 'upgrade your '),
+                      TextSpan(
+                        text: 'upgrade your ',
+                        style: headerStyle.copyWith(color: white)),
                       TextSpan(
                           text: 'fish',
                           style: headerStyle.copyWith(color: blue)),
