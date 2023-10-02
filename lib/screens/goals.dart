@@ -16,6 +16,8 @@ final formattedDate =
 class ToDoList extends StatefulWidget {
   const ToDoList({Key? key}) : super(key: key);
 
+
+
   @override
   _ToDoListState createState() => _ToDoListState();
 }
@@ -207,22 +209,25 @@ class CurDateTime extends StatelessWidget {
   }
 }
 
-showAlertDialog(BuildContext context) {
+showAlertDialog(BuildContext context) async {
+  // Create a GlobalKey to uniquely identify the AlertDialog
+  GlobalKey<State<StatefulWidget>> alertDialogKey = GlobalKey();
+
   // set up the button
   Widget okButton = TextButton(
     child: const Text("OK"),
     onPressed: () async {
-      Navigator.pop(context);
-      await Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const TrophyCase()));
+      // Dismiss the dialog by popping it using the global key
+      Navigator.of(alertDialogKey.currentContext!).pop();
     },
-
   );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
+    key: alertDialogKey, // Assign the GlobalKey to the AlertDialog
     title: const Text("Congratulations!"),
-    content: const Text("You have completed the minimum number of required tasks. Keep it up!"),
+    content: const Text(
+        "You have completed the minimum number of required tasks. Keep it up!"),
     actions: [
       okButton,
     ],
@@ -236,6 +241,7 @@ showAlertDialog(BuildContext context) {
     },
   );
 }
+
 
 Widget buildMenuItems(BuildContext context) => Container(
       padding: const EdgeInsets.all(24.0),
