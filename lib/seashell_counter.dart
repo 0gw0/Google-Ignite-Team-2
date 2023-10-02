@@ -13,7 +13,7 @@ class SeashellCounter extends StatelessWidget {
     );
   }
 
-  // Add this method to update seashells
+  //update seashells
   void updateSeashells(BuildContext context, int earnedSeashells) {
     Provider.of<SeashellProvider>(context, listen: false)
         .updateSeashells(earnedSeashells);

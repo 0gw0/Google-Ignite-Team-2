@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_fish_app/utils/constants/colors.dart';
-import '../utils/constants/colors.dart';
 import 'trophycase.dart';
 import 'dart:async';
 import 'package:healthy_fish_app/models/daily_task.dart';
-import 'home_screen.dart'; // Import the HomeScreen
+import 'home_screen.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

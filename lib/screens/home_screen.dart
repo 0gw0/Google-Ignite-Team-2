@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '/seashell_counter.dart';
-import '/seashell_provider.dart';
-import '/components/icons_component.dart'; // Import the IconsComponent
+import '/components/icons_component.dart';
 import 'package:healthy_fish_app/components/categories/categories_component.dart';
 import 'package:healthy_fish_app/components/news/dailychallenge.dart';
 import 'package:healthy_fish_app/components/news/news_item.dart';
