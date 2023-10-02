@@ -4,6 +4,8 @@ import 'package:healthy_fish_app/models/fish.dart';
 import 'package:healthy_fish_app/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart';
+import 'seashell_provider.dart'; 
 
 List<FishsModel> listFish = [];
 
@@ -21,7 +23,16 @@ void main() async {
      options: DefaultFirebaseOptions.currentPlatform,
    );
 
-  runApp(const MainApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SeashellProvider(),
+        ),
+      ],
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

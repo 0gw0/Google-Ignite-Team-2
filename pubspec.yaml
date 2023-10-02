@@ -14,6 +14,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   firebase_core: ^2.16.0
   cloud_firestore: ^4.9.2
+  provider: ^6.0.5  
 
 dev_dependencies:
   flutter_test:

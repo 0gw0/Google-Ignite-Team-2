@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
 import 'package:healthy_fish_app/utils/constants/colors.dart';
 import 'package:healthy_fish_app/utils/extension/nav.dart';
 
@@ -10,6 +9,8 @@ class IconsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int seashellCount = 0;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -33,11 +34,34 @@ class IconsComponent extends StatelessWidget {
           height: 44,
           width: 44,
           decoration: BoxDecoration(
-              color: darkBlue.withOpacity(0.8),
-              borderRadius: BorderRadius.circular(12)),
-          child: const Icon(
-            Icons.more_vert_rounded,
-            color: blue,
+            color: darkBlue.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                '../assets/images/seashell.png',  // Correct path to your seashell icon
+                color: Colors.yellow,
+                height: 24,  // Adjust the size as needed
+                width: 24,
+              ),
+              Positioned(
+                top: -3,
+                right: -3,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: blue,
+                  ),
+                  child: Text(
+                    seashellCount.toString(),
+                    style: TextStyle(color: darkBlue),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
