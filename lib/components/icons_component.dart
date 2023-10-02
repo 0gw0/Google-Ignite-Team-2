@@ -1,11 +1,13 @@
+// icons_component.dart
+
 import 'package:flutter/material.dart';
 import 'package:healthy_fish_app/utils/constants/colors.dart';
 import 'package:healthy_fish_app/utils/extension/nav.dart';
 
 class IconsComponent extends StatelessWidget {
   const IconsComponent({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +17,16 @@ class IconsComponent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
-           onTap: () {
-                      context.popNav();
-                      },
+          onTap: () {
+            context.popNav();
+          },
           child: Container(
             height: 44,
             width: 44,
             decoration: BoxDecoration(
-                color: darkBlue.withOpacity(0.8),
-                borderRadius: BorderRadius.circular(12)),
+              color: darkBlue.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: const Icon(
               Icons.arrow_back_ios_rounded,
               color: blue,

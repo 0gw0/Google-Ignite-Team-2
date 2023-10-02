@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '/seashell_counter.dart';  // Import the SeashellCounter
+import '/components/icons_component.dart';   // Import the IconsComponent
+
 import 'package:healthy_fish_app/components/categories/categories_component.dart';
 import 'package:healthy_fish_app/components/news/dailychallenge.dart';
 import 'package:healthy_fish_app/components/news/news_item.dart';
@@ -40,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const FishCard(),
                 const DailyChallenge(),
                 pVSpace16,
-                const NewsItem()
+                const NewsItem(),
               ],
             ),
             Positioned(
