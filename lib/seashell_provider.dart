@@ -5,14 +5,26 @@ class SeashellProvider extends ChangeNotifier {
 
   int get seashellCount => _seashellCount;
 
-  void incrementSeashell() {
-    _seashellCount++;
+  // Method to add seashells
+  void addSeashells(int amount) {
+    _seashellCount += amount;
     notifyListeners();
   }
 
-  void decrementSeashell() {
-    if (_seashellCount > 0) {
-      _seashellCount--;
+  // If you want to keep the updateSeashells method, you can do so
+  // and make it do something different from addSeashells
+  void updateSeashells(int amount) {
+    // For example, you might want to update differently based on certain conditions
+    if (amount > 0) {
+      _seashellCount += amount;
+      notifyListeners();
+    }
+  }
+
+  // Method to deduct seashells
+  void deductSeashells(int amount) {
+    if (_seashellCount >= amount) {
+      _seashellCount -= amount;
       notifyListeners();
     }
   }

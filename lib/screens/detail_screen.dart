@@ -10,7 +10,7 @@ import 'package:healthy_fish_app/utils/constants/spaces.dart';
 import 'package:healthy_fish_app/utils/extension/screen_size.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key, required this.fish});
+  const DetailScreen({Key? key, required this.fish}) : super(key: key);
   final FishsModel fish;
 
   @override
@@ -43,9 +43,9 @@ class DetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: SizeAndHealth(fish: fish),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

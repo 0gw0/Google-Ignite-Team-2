@@ -7,35 +7,15 @@ class SeashellCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SeashellProvider>(
       builder: (context, seashellProvider, child) {
-        return Positioned(
-          top: 0,
-          right: 0,
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                ImageIcon(
-                  AssetImage('../assets/images/seashell.png'),
-                  color: Colors.yellow, // Change this to your desired color
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  '${seashellProvider.seashellCount}',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        );
+        // Always return an empty container to keep the counter invisible
+        return Container();
       },
     );
   }
+
+  // Add this method to update seashells
+  void updateSeashells(BuildContext context, int earnedSeashells) {
+    Provider.of<SeashellProvider>(context, listen: false)
+        .updateSeashells(earnedSeashells);
+  }
 }
-
-
-
-

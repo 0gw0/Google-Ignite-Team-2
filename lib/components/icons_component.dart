@@ -1,8 +1,8 @@
-// icons_component.dart
-
 import 'package:flutter/material.dart';
 import 'package:healthy_fish_app/utils/constants/colors.dart';
 import 'package:healthy_fish_app/utils/extension/nav.dart';
+import 'package:provider/provider.dart';
+import '../seashell_provider.dart';  // Adjust the import path based on your project structure
 
 class IconsComponent extends StatelessWidget {
   const IconsComponent({
@@ -11,7 +11,8 @@ class IconsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int seashellCount = 0;
+    // Use Provider to get the seashell count
+    int seashellCount = Provider.of<SeashellProvider>(context).seashellCount;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +45,7 @@ class IconsComponent extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Image.asset(
-                '../assets/images/seashell.png',  // Correct path to your seashell icon
+                'assets/images/seashell.png',  // Correct path to your seashell icon
                 color: Colors.yellow,
                 height: 24,  // Adjust the size as needed
                 width: 24,
