@@ -11,7 +11,7 @@ import 'package:healthy_fish_app/utils/extension/screen_size.dart';
 
 class FishCard extends StatefulWidget {
   const FishCard({
-    super.key,
+    Key? key,
   });
 
   @override
@@ -42,29 +42,31 @@ class _FishCardState extends State<FishCard> {
   }
 
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: context.getHeight * 0.5,
-      child: PageView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: listFish.length,
-        controller: pageController,
-        itemBuilder: (context, index) {
-          double scale = max(viewPortFraction,
-              (1 - (pageOffset! - index).abs() + viewPortFraction));
-          return GestureDetector(
-            onTap: () {
-              context.pushNav(
-                  screen: DetailScreen(
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: context.getHeight * 0.5,
+        child: PageView.builder(
+          physics: const BouncingScrollPhysics(),
+          itemCount: listFish.length,
+          controller: pageController,
+          itemBuilder: (context, index) {
+            double scale = max(viewPortFraction,
+                (1 - (pageOffset! - index).abs() + viewPortFraction));
+            return GestureDetector(
+              onTap: () {
+                context.pushNav(
+                    screen: DetailScreen(
+                  fish: listFish[index],
+                ));
+              },
+              child: FishItem(
+                viewPortFraction: viewPortFraction,
+                scale: scale,
                 fish: listFish[index],
-              ));
-            },
-            child: FishItem(
-              viewPortFraction: viewPortFraction,
-              scale: scale,
-              fish: listFish[index],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
