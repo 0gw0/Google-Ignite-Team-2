@@ -5,6 +5,7 @@ import '../utils/constants/colors.dart';
 import 'trophycase.dart';
 import 'dart:async';
 import 'package:healthy_fish_app/models/daily_task.dart';
+import 'home_screen.dart'; // Import the HomeScreen
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -16,13 +17,10 @@ final formattedDate =
 class ToDoList extends StatefulWidget {
   const ToDoList({Key? key}) : super(key: key);
 
-
-
   @override
   _ToDoListState createState() => _ToDoListState();
 }
 
-// State of the main screen
 class _ToDoListState extends State<ToDoList> {
   @override
   Widget build(BuildContext context) {
@@ -47,9 +45,8 @@ class _ToDoListState extends State<ToDoList> {
   }
 }
 
-// Fetch Firestore document and handle response
 class DailyTaskFetcher extends StatelessWidget {
-  const DailyTaskFetcher({super.key});
+  const DailyTaskFetcher({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +54,12 @@ class DailyTaskFetcher extends StatelessWidget {
       future: _fetchDailyTasks(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          // Display a loading indicator while fetching data
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          // Handle any errors that occur during data fetching
           return Center(child: Text("Error: ${snapshot.error}"));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          // If there is no data or data is empty, display a message
           return Center(child: Text("No daily tasks available for today."));
         } else {
-          // Display the list of daily tasks
           return ToDoWidget(dailyTasks: snapshot.data!);
         }
       },
@@ -83,7 +76,6 @@ class DailyTaskFetcher extends StatelessWidget {
   }
 }
 
-// Widget that displays a list of daily tasks
 class ToDoWidget extends StatefulWidget {
   final List<DailyTask> dailyTasks;
 
@@ -93,14 +85,12 @@ class ToDoWidget extends StatefulWidget {
   _ToDoWidgetState createState() => _ToDoWidgetState();
 }
 
-// State of the ToDoWidget. Populate each list with task and set gesture detector
 class _ToDoWidgetState extends State<ToDoWidget> {
   List<List<bool>> _selected = [];
 
   @override
   void initState() {
     super.initState();
-    // Initialize _selected list for each daily task
     _selected = List.generate(widget.dailyTasks.length,
             (index) => List.generate(widget.dailyTasks[index].tasks.length, (i) => false));
   }
@@ -127,8 +117,6 @@ class _ToDoWidgetState extends State<ToDoWidget> {
 
               return GestureDetector(
                 onTap: () {
-                  // Handle the task tap event here
-                  // Toggle the selection state
                   setState(() {
                     _selected[index][taskIndex] = !_selected[index][taskIndex];
                     _itemCount += 1;
@@ -137,6 +125,11 @@ class _ToDoWidgetState extends State<ToDoWidget> {
                   if (_itemCount == 5) {
                     _itemCount = 0;
                     showAlertDialog(context);
+                    // Navigate to HomeScreen after completing 5 tasks
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
                   }
                 },
                 child: Card(
@@ -163,7 +156,6 @@ class _ToDoWidgetState extends State<ToDoWidget> {
     );
   }
 }
-
 
 class CurDateTime extends StatelessWidget {
   @override
@@ -210,21 +202,17 @@ class CurDateTime extends StatelessWidget {
 }
 
 showAlertDialog(BuildContext context) async {
-  // Create a GlobalKey to uniquely identify the AlertDialog
   GlobalKey<State<StatefulWidget>> alertDialogKey = GlobalKey();
 
-  // set up the button
   Widget okButton = TextButton(
     child: const Text("OK"),
     onPressed: () async {
-      // Dismiss the dialog by popping it using the global key
       Navigator.of(alertDialogKey.currentContext!).pop();
     },
   );
 
-  // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    key: alertDialogKey, // Assign the GlobalKey to the AlertDialog
+    key: alertDialogKey,
     title: const Text("Congratulations!"),
     content: const Text(
         "You have completed the minimum number of required tasks. Keep it up!"),
@@ -233,7 +221,6 @@ showAlertDialog(BuildContext context) async {
     ],
   );
 
-  // show the dialog
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -241,7 +228,6 @@ showAlertDialog(BuildContext context) async {
     },
   );
 }
-
 
 Widget buildMenuItems(BuildContext context) => Container(
       padding: const EdgeInsets.all(24.0),
